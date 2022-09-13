@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/snak.gd" type="Script" id=1]
+[ext_resource path="res://scripts/foodhandler.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Control.gd" type="Script" id=3]
+[ext_resource path="res://ScoreFont.tres" type="DynamicFont" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="world" type="Node2D"]
+
+[node name="player" type="KinematicBody2D" parent="."]
+position = Vector2( 200, 200 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+shape = SubResource( 1 )
+
+[node name="snakebodyholder" type="Node" parent="."]
+
+[node name="foodholder" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1026.0
+margin_bottom = 243.0
+script = ExtResource( 3 )
+
+[node name="ded" type="Label" parent="Control"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -65.0
+margin_right = 65.0
+margin_bottom = 47.0
+text = "lol u ded
+
+press space to play again"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="Score" type="Label" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -175.5
+margin_top = -157.5
+margin_right = 175.5
+margin_bottom = 157.5
+custom_fonts/font = ExtResource( 4 )
+text = "placeHolder"
+align = 1
+valign = 1
+uppercase = true
+
+[connection signal="ate" from="player" to="foodholder" method="_on_KinematicBody2D_ate"]
